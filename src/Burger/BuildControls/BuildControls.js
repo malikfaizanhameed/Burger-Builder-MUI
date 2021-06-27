@@ -25,8 +25,16 @@ const BuildControls = (props) => {
       ))}
       <Button
         variant="contained"
+        color="secondary"
+        disabled={!props.purchasable}
+        onClick={() => props.clear()}
+      >
+        Clear All
+      </Button>
+      <Button
+        variant="contained"
         color="inherit"
-        onClick={() => console.log("ORDERED!")}
+        onClick={props.ordered}
         disabled={!props.purchasable}
       >
         ORDER NOW!

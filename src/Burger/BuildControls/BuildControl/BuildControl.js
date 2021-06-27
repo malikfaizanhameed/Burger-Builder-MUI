@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 const BuildControl = (props) => {
   return (
     <div>
+      {props.label}
       <Button
         variant="contained"
         color="secondary"

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Aux from "./Aux";
 import BuildControls from "./Burger/BuildControls/BuildControls";
 import Burger from "./Burger/Burger";
+import Modal from "./Modal/Modal";
+import OderSummary from "./Burger/OrderSummary/OrderSummary";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -14,12 +16,13 @@ const BurgerBuilder = (props) => {
   const [state, setState] = useState({
     ingredients: {
       salad: 0,
+      bacon: 0,
       cheese: 0,
       meat: 0,
-      bacon: 0,
     },
     totalPrice: 4,
     purchasable: false,
+    purchasing: false,
   });
 
   const addIngredientHandler = (type) => {
@@ -95,17 +98,64 @@ const BurgerBuilder = (props) => {
     }
   };
 
+  const clearIngredientsHandler = () => {
+    let clearedIngredients = {
+      salad: 0,
+      bacon: 0,
+      cheese: 0,
+      meat: 0,
+    };
+    setState({
+      ...state,
+      ingredients: clearedIngredients,
+      totalPrice: 4,
+      purchasable: false,
+    });
+  };
+
+  const orderHandler = () => {
+    console.log("ORDERED!");
+    setState({
+      ...state,
+      purchasing: true,
+    });
+  };
+
+  const orderCancelHandler = () => {
+    setState({
+      ...state,
+      purchasing: false,
+    });
+  };
+
+  const orderContinueHandler = (props) => {
+    console.log(
+      "This is where the order gets sent to the DB and rerouted to home page"
+    );
+  };
+
   const disabledInfo = {
     ...state.ingredients,
   };
 
   for (let key in disabledInfo) {
-    disabledInfo[key] = disabledInfo[key] <= 0;
+    disabledInfo[key] = disabledInfo[key] <= 0; // creating an array with true/false for each ingredient
   }
+
+  let orderSummary = (
+    <OderSummary
+      ingredients={state.ingredients}
+      price={state.totalPrice}
+      cancel={orderCancelHandler}
+      continue={orderContinueHandler}
+    />
+  );
 
   return (
     <Aux>
-      <div>Burger Builder Page</div>
+      <Modal show={state.purchasing} closeModal={orderCancelHandler}>
+        {orderSummary}
+      </Modal>
       <Burger ingredients={state.ingredients} />
       <BuildControls
         price={state.totalPrice}
@@ -113,6 +163,9 @@ const BurgerBuilder = (props) => {
         ingredientRemoved={removeIngredientHandler}
         purchasable={state.purchasable}
         disabled={disabledInfo}
+        clear={clearIngredientsHandler}
+        ordered={orderHandler}
+        cancelOrder={orderCancelHandler}
       />
     </Aux>
   );
