@@ -19,6 +19,7 @@ const BurgerBuilder = (props) => {
       bacon: 0,
     },
     totalPrice: 4,
+    purchasable: false,
   });
 
   const addIngredientHandler = (type) => {
@@ -35,6 +36,20 @@ const BurgerBuilder = (props) => {
       ingredients: updatedIngredients,
       totalPrice: newPrice,
     });
+
+    if (updatePurchaseState(updatedIngredients)) {
+      setState({
+        ingredients: updatedIngredients,
+        totalPrice: newPrice,
+        purchasable: true,
+      });
+    } else {
+      setState({
+        ingredients: updatedIngredients,
+        totalPrice: newPrice,
+        purchasable: false,
+      });
+    }
   };
 
   const removeIngredientHandler = (type) => {
@@ -51,10 +66,19 @@ const BurgerBuilder = (props) => {
     const oldPrice = state.totalPrice;
     const newPrice = oldPrice - priceReduction;
 
-    setState({
-      ingredients: updatedIngredients,
-      totalPrice: newPrice,
-    });
+    if (updatePurchaseState(updatedIngredients)) {
+      setState({
+        ingredients: updatedIngredients,
+        totalPrice: newPrice,
+        purchasable: true,
+      });
+    } else {
+      setState({
+        ingredients: updatedIngredients,
+        totalPrice: newPrice,
+        purchasable: false,
+      });
+    }
   };
 
   const updatePurchaseState = (ingredients) => {
@@ -71,6 +95,14 @@ const BurgerBuilder = (props) => {
     }
   };
 
+  const disabledInfo = {
+    ...state.ingredients,
+  };
+
+  for (let key in disabledInfo) {
+    disabledInfo[key] = disabledInfo[key] <= 0;
+  }
+
   return (
     <Aux>
       <div>Burger Builder Page</div>
@@ -79,6 +111,8 @@ const BurgerBuilder = (props) => {
         price={state.totalPrice}
         ingredientAdded={addIngredientHandler}
         ingredientRemoved={removeIngredientHandler}
+        purchasable={state.purchasable}
+        disabled={disabledInfo}
       />
     </Aux>
   );

@@ -20,12 +20,14 @@ const BuildControls = (props) => {
           label={ctrl.label}
           added={() => props.ingredientAdded(ctrl.type)}
           removed={() => props.ingredientRemoved(ctrl.type)}
+          disabled={props.disabled[ctrl.type]}
         />
       ))}
       <Button
         variant="contained"
         color="inherit"
         onClick={() => console.log("ORDERED!")}
+        disabled={!props.purchasable}
       >
         ORDER NOW!
       </Button>
