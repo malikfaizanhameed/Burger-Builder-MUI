@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Aux from "./Aux";
-import BuildControls from "./Burger/BuildControls/BuildControls";
-import Burger from "./Burger/Burger";
-import Modal from "./Modal/Modal";
-import OderSummary from "./Burger/OrderSummary/OrderSummary";
+import Aux from "../../hoc/Aux/Aux";
+import BuildControls from "../../components/Burger/BuildControls/BuildControls";
+import Burger from "../../components/Burger/Burger";
+import Modal from "../../components/UI/Modal/Modal/Modal";
+import OderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -132,6 +132,19 @@ const BurgerBuilder = (props) => {
     console.log(
       "This is where the order gets sent to the DB and rerouted to home page"
     );
+    console.log(state.ingredients, state.totalPrice);
+
+    const queryParams = [];
+    for (let i in state.ingredients) {
+      queryParams.push(i + "=" + state.ingredients[i]);
+    }
+    queryParams.push("price=" + state.totalPrice);
+    const queryString = queryParams.join("&");
+    console.log("PROPS", props.history);
+    // props.history.push({
+    //   pathname: "/checkout",
+    //   search: "?" + queryString,
+    // });
   };
 
   const disabledInfo = {
