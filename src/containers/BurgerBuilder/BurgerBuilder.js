@@ -128,7 +128,7 @@ const BurgerBuilder = (props) => {
     });
   };
 
-  const orderContinueHandler = (props) => {
+  const orderContinueHandler = () => {
     console.log(
       "This is where the order gets sent to the DB and rerouted to home page"
     );
@@ -140,11 +140,11 @@ const BurgerBuilder = (props) => {
     }
     queryParams.push("price=" + state.totalPrice);
     const queryString = queryParams.join("&");
-    console.log("PROPS", props.history);
-    // props.history.push({
-    //   pathname: "/checkout",
-    //   search: "?" + queryString,
-    // });
+
+    props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryString,
+    });
   };
 
   const disabledInfo = {
