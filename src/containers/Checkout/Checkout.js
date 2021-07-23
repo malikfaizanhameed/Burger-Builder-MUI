@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Checkout.module.css";
 import CheckoutSummary from "../../components/Order/Checkout Summary/CheckoutSummary";
+import { Route } from "react-router-dom";
+import ContactData from "./ContactData/ContactData";
 
 const Checkout = (props) => {
   // debugger;
@@ -24,10 +26,32 @@ const Checkout = (props) => {
     setState({ ingredients: ingredients, totalPrice: price });
   }, []);
 
+  const checkoutCancelHandler = () => {
+    props.history.goBack();
+  };
+
+  const checkoutContinueHandler = () => {
+    props.history.replace("/checkout/contact-data");
+  };
+
   return (
-    <div>
+    <div className={classes.Checkout}>
       CHECKOUT PAGE
-      <CheckoutSummary ingredients={state.ingredients} />
+      <CheckoutSummary
+        ingredients={state.ingredients}
+        cancel={checkoutCancelHandler}
+        continue={checkoutContinueHandler}
+      />
+      <Route
+        path={props.match.path + "/contact-data"}
+        render={(props) => (
+          <ContactData
+            ingredients={state.ingredients}
+            price={state.price}
+            {...props}
+          />
+        )}
+      />
     </div>
   );
 };

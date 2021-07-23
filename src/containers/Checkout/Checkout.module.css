@@ -1,4 +1,6 @@
 .Checkout {
-  /* display: flex; */
+  display: flex;
+  flex-flow: column;
   align-items: center;
+  text-align: center;
 }

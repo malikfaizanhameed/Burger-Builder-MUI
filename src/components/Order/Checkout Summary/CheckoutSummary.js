@@ -8,12 +8,11 @@ const CheckoutSummary = (props) => {
   if (props.ingredients !== null) {
     return (
       <div>
-        BURGER SHOULD DISPLAY HERE
         <Burger ingredients={props.ingredients} />
-        <Button color="secondary" variant="contained">
+        <Button color="secondary" variant="contained" onClick={props.cancel}>
           Cancel
         </Button>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={props.continue}>
           Continue
         </Button>
       </div>
