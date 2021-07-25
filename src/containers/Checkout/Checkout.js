@@ -8,7 +8,7 @@ const Checkout = (props) => {
   // debugger;
   const [state, setState] = useState({
     ingredients: null,
-    price: 0,
+    totalPrice: 0,
   });
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const Checkout = (props) => {
         render={(props) => (
           <ContactData
             ingredients={state.ingredients}
-            price={state.price}
+            price={state.totalPrice}
             {...props}
           />
         )}

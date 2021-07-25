@@ -18,15 +18,30 @@ const ContactData = (props) => {
     const { name, value, type, checked } = e.target;
     type === "checkbox"
       ? setState({
+          ...state,
           [name]: checked,
         })
       : setState({
+          ...state,
           [name]: value,
         });
   };
 
-  const orderHandler = () => {
+  const orderHandler = (e) => {
     console.log("Order Handler");
+    e.preventDefault();
+    setState({
+      ...state,
+      loading: true,
+    });
+    const order = {
+      price: props.price,
+      ingredients: props.ingredients,
+      customer: {
+        ...state,
+      },
+    };
+    console.log("THE ORDER PLACED!", order);
   };
 
   let form = (

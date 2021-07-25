@@ -114,7 +114,7 @@ const BurgerBuilder = (props) => {
   };
 
   const orderHandler = () => {
-    console.log("ORDERED!");
+    console.log("BURGER MADE");
     setState({
       ...state,
       purchasing: true,
@@ -129,10 +129,7 @@ const BurgerBuilder = (props) => {
   };
 
   const orderContinueHandler = () => {
-    console.log(
-      "This is where the order gets sent to the DB and rerouted to home page"
-    );
-    console.log(state.ingredients, state.totalPrice);
+    console.log("ORDER CONTINUE!");
 
     const queryParams = [];
     for (let i in state.ingredients) {
