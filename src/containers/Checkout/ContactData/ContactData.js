@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classes from "./ContactData.module.css";
 import { Button } from "@material-ui/core";
+import axios from "../../../axios-orders";
 
 const ContactData = (props) => {
   const [state, setState] = useState({
@@ -42,6 +43,12 @@ const ContactData = (props) => {
       },
     };
     console.log("THE ORDER PLACED!", order);
+    axios
+      .post("/order", order)
+      .then((response) => {
+        console.log("SENT TO SERVER!");
+      })
+      .catch((e) => console.error(e));
   };
 
   let form = (

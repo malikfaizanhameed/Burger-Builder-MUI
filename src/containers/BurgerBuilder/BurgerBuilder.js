@@ -168,6 +168,7 @@ const BurgerBuilder = (props) => {
       </Modal>
       <Burger ingredients={state.ingredients} />
       <BuildControls
+        className="controls"
         price={state.totalPrice}
         ingredientAdded={addIngredientHandler}
         ingredientRemoved={removeIngredientHandler}

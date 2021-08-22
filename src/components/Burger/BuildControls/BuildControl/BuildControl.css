@@ -1,0 +1,36 @@
+.BuildControl {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  /* flex: 1; */
+  /* border: 10px solid blue; */
+  /* justify-content: space-between; */
+}
+
+.Label {
+  /* border: 5px solid black; */
+  display: flex;
+  margin-right: 5px;
+  /* flex: 0.2; */
+  font-weight: bold;
+  width: 80px;
+}
+
+.Buttons {
+  width: 170px;
+  /* border: 5px solid green; */
+  display: flex;
+  align-items: center;
+  /* flex: 0.8; */
+}
+
+.Less {
+  margin-right: 5px;
+  flex: 0.5;
+}
+
+.More {
+  flex: 0.5;
+}

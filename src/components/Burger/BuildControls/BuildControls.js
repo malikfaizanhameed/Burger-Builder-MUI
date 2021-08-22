@@ -23,22 +23,24 @@ const BuildControls = (props) => {
           disabled={props.disabled[ctrl.type]}
         />
       ))}
-      <Button
-        variant="contained"
-        color="secondary"
-        disabled={!props.purchasable}
-        onClick={() => props.clear()}
-      >
-        Clear All
-      </Button>
-      <Button
-        variant="contained"
-        color="inherit"
-        onClick={props.ordered}
-        disabled={!props.purchasable}
-      >
-        ORDER NOW!
-      </Button>
+      <div className={classes.OrderButtons}>
+        <Button
+          variant="contained"
+          color="secondary"
+          disabled={!props.purchasable}
+          onClick={() => props.clear()}
+        >
+          Clear All
+        </Button>
+        <Button
+          variant="contained"
+          color="inherit"
+          onClick={props.ordered}
+          disabled={!props.purchasable}
+        >
+          ORDER NOW!
+        </Button>
+      </div>
     </div>
   );
 };
